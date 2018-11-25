@@ -5,6 +5,7 @@ from copy import deepcopy
 import random
 import math
 
+from priority_queue import MaxHeap
 
 class MergeSort:
     def __init__(self, arr):
@@ -78,5 +79,22 @@ class QuickSort:
         _aux = deepcopy(arr[x])
         arr[x] = arr[y]
         arr[y] = _aux
+
+
+class HeapSort:
+    def __init__(self, arr):
+        self._sort(arr)
+
+    def _sort(self, arr):
+        _res = []
+        heap = MaxHeap(arr)
+        for k in range((len(heap.arr)-1)/2, 0, -1):
+            heap.sink(k)
+        while len(heap.arr) > 1:
+            _res.insert(0, heap.del_max())
+        for i in range(len(arr)):
+            arr[i] = _res[i]
+
+
 
 
