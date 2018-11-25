@@ -6,5 +6,5 @@ if __name__ == '__main__':
     t.put(1, 1)
     t.put(3, 3)
     t.put(2, 2)
-    print t.size()
+    print t.iterate()
 
