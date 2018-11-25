@@ -31,7 +31,7 @@ class BST:
         if key < x.key:
             return self._rank(key, x.left)
         elif key > x.key:
-            return 1 + self._size(x.left) +  self._rank(key, x.right)
+            return 1 + self._size(x.left) + self._rank(key, x.right)
         else:
             return self._size(x.left)
 
@@ -60,6 +60,18 @@ class BST:
             else:
                 return x.val
         return None
+
+    def iterate(self):
+        q = []
+        self._inorder(self.root, q)
+        return q
+
+    def _inorder(self, x, q):
+        if x is None:
+            return
+        self._inorder(x.left, q)
+        q.append(x.key)
+        self._inorder(x.right, q)
 
     def floor(self, key):
         x = self._floor(self.root, key)
