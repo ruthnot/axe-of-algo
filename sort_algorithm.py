@@ -7,6 +7,7 @@ import math
 
 from priority_queue import MaxHeap
 
+
 class MergeSort:
     def __init__(self, arr):
         aux = deepcopy(arr)
