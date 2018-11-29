@@ -16,6 +16,39 @@ class RedBlackBST:
     def __init__(self):
         self.root = None
 
+    def put(self, key, val):
+        self.root = self._put(self.root, key, val)
+
+    def _put(self, h, key, val):
+        if h is None:
+            return Node(key, val, RED)
+        if key < h.key:
+            h.left = self._put(h.left, key, val)
+        elif key > h.key:
+            h.right = self._put(h.right, key, val)
+        else:
+            h.val = val
+
+        if self._is_red(h.right) and not self._is_red(h.left):
+            self._rotate_left(h)
+        if self._is_red(h.left) and self._is_red(h.left.left):
+            self._rotate_right(h)
+        if self._is_red(h.left) and self._is_red(h.right):
+            self._flip_colors(h)
+
+        return h
+
+    def get(self, key):
+        h = self.root
+        while h is not None:
+            if key < h.key:
+                h = h.left
+            elif key > h.key:
+                h = h.right
+            else:
+                return h.val
+        return None
+
     def _is_red(self, x):
         if x == None:
             return False
@@ -46,5 +79,5 @@ class RedBlackBST:
         h.color = RED
         h.left.color = BLACK
         h.left.color = BLACK
-        
+
 
