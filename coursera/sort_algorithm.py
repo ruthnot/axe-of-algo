@@ -5,7 +5,7 @@ from copy import deepcopy
 import random
 import math
 
-from priority_queue import MaxHeap
+from coursera.priority_queue import MaxHeap
 
 
 class MergeSort:
