@@ -5,6 +5,8 @@
 #         self.left = None
 #         self.right = None
 
+from collections import deque
+
 
 class Solution(object):
     def isSymmetric(self, root):
@@ -13,12 +15,33 @@ class Solution(object):
         :rtype: bool
         """
         if not root: return True
-        return self.compare(root.left, root.right)
+        # return self.DFS(root.left, root.right)
+        return self.BFS(root)
 
-    def compare(self, a, b):
+    def DFS(self, a, b):
         if not a and not b: return True
         if a and b and a.val == b.val:
-            return self.compare(a.left, b.right) and self.compare(a.right, b.left)
+            return self.DFS(a.left, b.right) and self.DFS(a.right, b.left)
         else:
             return False
 
+    def BFS(self, root):
+        if not root: return True
+        q = deque()
+        q.append(root.left)
+        q.append(root.right)
+
+        while len(q) > 1:
+            if (q[0] and not q[1]) or (not q[0] and q[1]):
+                return False
+            elif q[0] and q[1] and q[0].val != q[1].val:
+                return False
+            else:
+                if q[0] and q[1]:
+                    q.append(q[0].left)
+                    q.append(q[1].right)
+                    q.append(q[0].right)
+                    q.append(q[1].left)
+                q.popleft()
+                q.popleft()
+        return True
